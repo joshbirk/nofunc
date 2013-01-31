@@ -62,6 +62,10 @@ public with sharing class VisualforceController {
 		clonedAccount.Name = newName; //set via param components on Visualforce
 		insert clonedAccount; //DML allowed here 
 		
+		//return: 
+		//null to stay on the same page
+		//PageReference with setRedirect(false) = wizard style, viewstate intact
+		//PageReference with setRidirect(true) = new page, viewstate flushed
 		return null;
 	}
 	
@@ -95,6 +99,20 @@ public with sharing class VisualforceController {
 	}
 	*/
 	
+	/* Cookie Methods */
+	/*
+	public PageReference setCookies() {
+		//Cookie = new Cookie(String name, String value, String path, Integer milliseconds, Boolean isHTTPSOnly)
+		Cookie companyName = new Cookie('accountName','TestCo',null,315569260,false); //10 year cookie
+		ApexPages.currentPage().setCookies(new Cookie[]{companyName});
+		
+		return null;
+	}
+	
+	public String getCookieValue() {
+		return ApexPages.currentPage().getCookies().get('accountName').getValue();
+	}
+	*/
 
 
 
