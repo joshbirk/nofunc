@@ -29,8 +29,10 @@ public with sharing class VisualforceController {
 		}
 		
 		//check the format of expected parameters - this is good for SOQL injection protection
-		if(ApexPages.currentPage().getParameters().get('id').length() != 15 &&
-			ApexPages.currentPage().getParameters().get('id').length() != 18) {
+		ID testID = null;
+		try {
+		    testID = ApexPages.currentPage().getParameters().get('id'); 
+		}	catch(Exception ex) { 
 			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.FATAL,'Not a valid ID pass'));
 			return;
 		}
