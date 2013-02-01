@@ -29,15 +29,15 @@ public with sharing class VisualforceController {
 		}
 		
 		//check the format of expected parameters - this is good for SOQL injection protection
-		ID testID = null;
+		ID accountID = null;
 		try {
-		    testID = ApexPages.currentPage().getParameters().get('id'); 
+		    accountID = ApexPages.currentPage().getParameters().get('id'); 
 		}	catch(Exception ex) { 
-			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.FATAL,'Not a valid ID pass'));
+			ApexPages.addMessage(new ApexPages.Message(ApexPages.Severity.FATAL,'Not a valid ID'));
 			return;
 		}
-		
-		List<Account> accountsForId = [SELECT ID, Name from ACCOUNT WHERE Id =: ApexPages.currentPage().getParameters().get('id') LIMIT 1];
+		accountID = ApexPages.currentPage().getParameters().get('id'); 
+		List<Account> accountsForId = [SELECT ID, Name from ACCOUNT WHERE Id =: accountID LIMIT 1];
 		if(accountsForId.size() == 1) {
 			testAccount = accountsForId[0];
 		} else { //build custom error for messages component
